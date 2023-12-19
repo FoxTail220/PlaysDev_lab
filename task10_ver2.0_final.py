@@ -4,8 +4,8 @@ import psutil
 from datetime import datetime, timedelta
 import time
 
-aws_access_key = 'AKIATSQNSBNZDAP44DEA'
-aws_secret_key = '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'
+aws_access_key = ''
+aws_secret_key = ''
 aws_region = 'us-east-1'
 
 global_private_key_path = 'C:\\Users\\GGWP\\.ssh\\id_rsa\\task10.pem' 
