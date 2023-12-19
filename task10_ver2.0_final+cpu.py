@@ -3,8 +3,8 @@ import paramiko
 from datetime import datetime, timedelta
 import time
 
-aws_access_key = 'AKIATSQNSBNZKJPBDP6F'
-aws_secret_key = '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'
+aws_access_key = ''
+aws_secret_key = ''
 aws_region = 'us-east-1'
 
 global_private_key_path = 'C:\\Users\\GGWP\\.ssh\\id_rsa\\task10.pem' 
