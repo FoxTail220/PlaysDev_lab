@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  custom_nginx:
+    image: nginx_custom
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8081"
+      - "8082:8082"
+    command: nginx -g 'daemon off;'
+    container_name: custom_nginx
+    volumes:
+      - /home/valera/docker/nginx_custom/ssl:/etc/nginx/ssl
