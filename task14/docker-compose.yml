@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+  custom_apache:
+    image: apache_custom
+    container_name: custom_apache
+    ports:
+      - "8080:8080"
+    command: echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+
   custom_nginx:
     image: nginx_custom
     ports:
