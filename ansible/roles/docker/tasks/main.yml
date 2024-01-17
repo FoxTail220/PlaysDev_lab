@@ -1,0 +1,21 @@
+---
+- name: Install Docker on Ubuntu
+  ansible.builtin.package:
+    name: docker.io
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Install Docker on Amazon Linux
+  ansible.builtin.dnf:
+    name: docker
+    state: present
+  when: ansible_distribution == 'Amazon'
+  become: true
+
+- name: Start Docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+  become: true

@@ -1,0 +1,12 @@
+
+
+---
+
+- name: Deploy docker container
+  hosts: all
+  become: yes
+  roles:
+
+    - apt-update
+    - docker
+    - git
