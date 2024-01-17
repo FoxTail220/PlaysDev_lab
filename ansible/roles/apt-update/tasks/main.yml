@@ -1,0 +1,10 @@
+---
+- name: Update package manager on Ubuntu
+  ansible.builtin.command: apt update
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Update package manager on Amazon Linux
+  ansible.builtin.command: dnf update
+  when: ansible_distribution == 'Amazon'
+  become: true

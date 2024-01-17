@@ -1,0 +1,16 @@
+---
+- name: Install Git and dependencies on Ubuntu
+  ansible.builtin.package:
+    name: git
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+
+
+
+- name: Install Git and dependencies on Amazon Linux
+  ansible.builtin.dnf:
+    name: git
+    state: present
+  when: ansible_distribution == 'Amazon'
+  become: true
