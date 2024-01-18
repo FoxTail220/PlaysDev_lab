@@ -10,3 +10,7 @@
     - apt-update
     - docker
     - git
+    - git-clone
+    - docker-build
+    - docker-deploy
+    - docker-deploy-on-aws
