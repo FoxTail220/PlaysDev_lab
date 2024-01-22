@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  nginx:
+    image: ngixnginx
+    container_name: nginx_container
+    ports:
+      - '443:443'
+      - '80:80'
+    depends_on:
+      - apache
+    networks:
+      - task17network
+  apache:
+    image: apacheapache
+    container_name: apache_container
+    ports:
+      - '8080:8080'
+    networks:
+      - task17network
+networks:
+  task17network:
+    name: task17network
+    driver: bridge

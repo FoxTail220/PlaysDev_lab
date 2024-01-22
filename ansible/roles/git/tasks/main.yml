@@ -9,7 +9,7 @@
 
 
 - name: Install Git and dependencies on Amazon Linux
-  ansible.builtin.dnf:
+  ansible.builtin.yum:
     name: git
     state: present
   when: ansible_distribution == 'Amazon'

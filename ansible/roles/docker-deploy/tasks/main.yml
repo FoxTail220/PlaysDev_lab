@@ -1,0 +1,27 @@
+---
+- name: Create Docker network task17network
+  docker_network:
+    name: task17network
+    state: present
+  when: ansible_os_family == 'Ubuntu'
+  become: true
+
+- name: Run Apache container
+  docker_container:
+    name: apache_container
+    image: apacheapache
+    ports:
+      - "8080:8080"
+    state: started
+  become: true
+
+- name: Run Nginx container
+  docker_container:
+    name: nginx_container
+    image: nginxnginx
+    ports:
+      - "80:80"
+      - "443:443"
+    state: started
+  become: true
+

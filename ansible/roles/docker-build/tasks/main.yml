@@ -1,0 +1,11 @@
+
+---
+- name: Build apache docker container
+  ansible.builtin.command:
+    cmd: "docker build -t apacheapache /var/git/task17/apache"
+    chdir: "/var/git/task17"
+
+- name: Build nginx docker container
+  ansible.builtin.command:
+    cmd: "docker build -t nginxnginx /var/git/task17/nginx"
+    chdir: "/var/git/task17"

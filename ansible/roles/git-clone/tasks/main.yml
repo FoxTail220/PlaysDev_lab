@@ -1,0 +1,34 @@
+
+
+---
+
+- name: Ensure the destination directory exists
+  ansible.builtin.file:
+    path: /var/ansible/ssh
+    state: directory
+    mode: '0775'
+
+- name: Ensure the key file destination directory exists
+  ansible.builtin.file:
+    path: /var/git
+    state: directory
+    mode: '0775'
+
+- name: Copy SSH key to new directory
+  ansible.builtin.copy:
+    src: /home/ubuntu/ansible/ssh/github.pem
+    dest: /var/ansible/ssh/github.pem
+    mode: '0400'
+
+
+- name: Clone Git repository
+  ansible.builtin.git:
+    repo: 'git@github.com:FoxTail220/PlaysDev_lab.git'
+    dest: '/var/git'
+    update: yes
+    force: yes
+    accept_hostkey: yes
+    key_file: '/var/ansible/ssh/github.pem'
+
+
+

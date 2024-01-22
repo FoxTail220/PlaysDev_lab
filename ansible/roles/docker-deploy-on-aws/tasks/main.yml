@@ -1,0 +1,20 @@
+---
+- name: Create /home/docker directory
+  file:
+    path: /home/docker
+    state: directory
+  when: ansible_os_family == 'RedHat'
+  become: true
+
+- name: Copy docker-compose.yml from master
+  copy:
+    src: /home/ubuntu/ansible/ssh/docker-compose.yml
+    dest: /home/docker/docker-compose.yml
+  when: ansible_os_family == 'RedHat'
+  become: true
+
+- name: Run docker containers via Docker compose
+  docker_compose:
+    project_src: /home/docker
+    state: present
+    files: docker-compose.yml

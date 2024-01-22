@@ -1,4 +1,26 @@
 ---
+
+- name: Install Python on Ubuntu
+  ansible.builtin.package:
+    name: python3
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Install Python pip for Ubuntu
+  ansible.builtin.package:
+    name: python3-pip
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+
+- name: Install Python pip for Amazon Linux
+  dnf:
+    name: python3-pip
+    state: present
+  when: ansible_distribution == 'Amazon'
+  become: true
+
 - name: Install Docker on Ubuntu
   ansible.builtin.package:
     name: docker.io
@@ -6,12 +28,27 @@
   when: ansible_distribution == 'Ubuntu'
   become: true
 
-- name: Install Docker on Amazon Linux
-  ansible.builtin.dnf:
+- name: Install Docker on Amazon
+  dnf:
     name: docker
     state: present
-  when: ansible_distribution == 'Amazon'
+  when: ansible_os_family == 'Amazon'
   become: true
+
+- name: Download Docker Compose on amazon linus
+  command: "curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+  when: ansible_os_family == 'RedHat'
+  become: true
+  args:
+    creates: /usr/local/bin/docker-compose
+
+- name: Make Docker Compose executable
+  command: "chmod +x /usr/local/bin/docker-compose"
+  when: ansible_os_family == 'RedHat'
+  become: true
+  args:
+    creates: /usr/local/bin/docker-compose
+
 
 - name: Start Docker service
   ansible.builtin.service:
