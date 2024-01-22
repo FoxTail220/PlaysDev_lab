@@ -19,5 +19,16 @@ pipeline {
                 }
             }
         }
+        stage('Docker build container nginx') {
+            steps {
+                dir('nginx') {
+                    sh """
+                        docker build -t foxtail220/nginx-jenkins2:1.${env.BUILD_NUMBER} .
+                        docker push foxtail220/nginx-jenkins2:1.${env.BUILD_NUMBER}
+                        docker rmi -f foxtail220/nginx-jenkins2:1.${env.BUILD_NUMBER}
+                    """
+                }
+            }
+        }
     }
 }
