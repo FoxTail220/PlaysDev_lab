@@ -30,5 +30,10 @@ pipeline {
                 }
             }
         }
+        stage('deploy to ec2_server using ansible') {
+            steps {
+                ansiblePlaybook becomeUser: 'ubuntu', credentialsId: 'ec2_ubuntu_server', inventory: '/home/jenkins/ansible/hosts.txt', playbook: '/home/jenkins/ansible/playbook.yml', vaultTmpPath: '', extraVars: [BUILD_NUMBER: env.BUILD_NUMBER]
+            }
+        }
     }
 }
