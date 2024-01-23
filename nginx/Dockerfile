@@ -12,7 +12,7 @@ RUN sed -i '6 a\load_module modules/ngx_http_image_filter_module.so;' /etc/nginx
 WORKDIR /usr/share/nginx
 
 RUN mkdir -p html/secondpage \
-    mkdir -p /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org \
+    mkdir /etc/nginx/ssl \
     music \
     redblue \
     images && \
@@ -23,5 +23,5 @@ RUN mkdir -p html/secondpage \
 
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./html /usr/share/nginx
-COPY ./ssl/fullchain.pem /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org
-COPY ./ssl/privkey.pem /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org  
+COPY ./ssl /etc/nginx/
+COPY ./ssl /etc/nginx/  
