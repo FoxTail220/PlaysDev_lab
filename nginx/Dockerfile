@@ -24,4 +24,4 @@ RUN mkdir -p html/secondpage \
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./html /usr/share/nginx
 COPY ./ssl/fullchain.pem /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org
-COPY ./ssl/privkey.pem.pem /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org  
+COPY ./ssl/privkey.pem /etc/letsencrypt/live/etc/letsencrypt/live/task18.hopto.org  
