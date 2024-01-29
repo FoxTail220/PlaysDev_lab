@@ -23,4 +23,3 @@ RUN mkdir -p html/secondpage \
 
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./html /usr/share/nginx
-COPY ./ssl /etc/nginx/ssl  

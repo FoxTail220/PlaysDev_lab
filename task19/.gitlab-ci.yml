@@ -1,0 +1,69 @@
+stages:
+  - login Docker hub
+  - build docker image
+  - login AWS CLI
+  - deploy ECS
+  - deploy CloudFront
+
+login:
+  tags:
+    - start
+  stage: login Docker hub
+  script:
+    - docker login -u "$CI_REGISTRY_DOCKER_USER" -p "$CI_REGISTRY_DOCKER_PASSWORD"
+
+build:
+  tags:
+    - start
+  stage: build docker image
+  script:
+    - docker build -t foxtail220/nginx_task19n:1."$CI_COMMIT_SHORT_SHA" ./nginx/
+    - docker push foxtail220/nginx_task19n:1."$CI_COMMIT_SHORT_SHA"
+    - docker rmi -f foxtail220/nginx_task19n:1."$CI_COMMIT_SHORT_SHA"
+  only:
+    - dev
+
+login_aws_cli:
+  tags:
+    - start
+  stage: login AWS CLI
+  script:
+    - aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+    - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+    - aws configure set region "$AWS_DEFAULT_REGION"
+  only:
+    - main
+  
+
+deploy_docker_image_to_aws_ecs_fragate: 
+  tags:
+    - start
+  stage: deploy ECS
+  script: 
+    - aws ecs register-task-definition --region "${AWS_DEFAULT_REGION}" --family task19n --container-definitions '[{
+          "name":"nginx",
+          "essential":true,
+          "image":"foxtail220/nginx_task19n:1.'$CI_COMMIT_SHORT_SHA'",
+          "portMappings":[
+            {
+                "containerPort":80,
+                "hostPort":80
+            }
+        ]}]' --cpu "256" --memory  "512" --network-mode  "awsvpc"  --requires-compatibilities "FARGATE" --execution-role-arn "arn:aws:iam::245915323250:role/ecsTaskExecutionRole"
+    - aws ecs update-service --region "${AWS_DEFAULT_REGION}" --cluster task19 --service DemoService  --task-definition task19n
+  only:
+    - main
+
+
+
+deploy_CloufFront:
+  tags:
+    - start
+  stage: deploy CloudFront
+  script:
+    - aws s3 sync nginx/html s3://"$S3_BUCKET_NAME"/
+    - aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths '/*'
+    - echo "DEPLOYED SUCCESSFULLY"
+  only:
+    - main
+  #when: manual

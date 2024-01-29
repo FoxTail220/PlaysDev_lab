@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image: foxtail220/nginx_task19n:1.3ad04327
+    labels:
+      logging: "promtail"
+      logging_jobname: "nginxlog"
+    ports:
+      - 80:80
+    networks:
+      - task22
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    networks:
+      - task22
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - task22
+
+  promtail:
+    image:  grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - ./promtail.yml:/etc/promtail/docker-config.yaml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/docker-config.yaml
+    depends_on:
+      - loki
+    networks:
+      - task22
+
+networks:
+  task22:
+    name: task22

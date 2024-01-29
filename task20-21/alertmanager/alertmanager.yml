@@ -1,0 +1,13 @@
+route:
+  group_by: ['alertname']
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'stardata-telegram'
+
+receivers:
+  - name: 'stardata-telegram'
+    telegram_configs:
+      - bot_token: 6614196487:AAEXhj80OOt3wPthNlfoW5RFiXWZiDoDbKY
+        api_url: https://api.telegram.org
+        chat_id: -1002127922308
+        parse_mode: ''

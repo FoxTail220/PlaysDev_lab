@@ -1,0 +1,11 @@
+groups:
+  - name: example
+    rules:
+      - alert: NodeCPUUsage
+        expr: (100 - (irate(node_cpu{mode="idle", job="<instance_address>"}[5m]) * 100)) > 50
+        for: 2m
+        labels:
+          severity: page
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is above 75%"

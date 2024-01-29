@@ -1,0 +1,27 @@
+groups:
+  - name: Localhost node
+    rules:
+      - alert: NodeCPUUsage
+        expr: 100 * (irate(node_cpu_seconds_total{metric="CPU", mode="idle"}[1m])) > 75
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "CPU usage is above 75%"
+          description: "High CPU usage alert! Do something! Value is: {{ $value }}."
+
+  - name: Recording rule
+    rules:
+      - record: VMUsagePercentage
+        expr: 100 * ((node_memory_MemTotal_bytes{metric="VM"} - node_memory_MemFree_bytes{metric="VM"} - node_memory_Buffers_bytes{metric="VM"} - node_memory_Cached_bytes{metric="VM"}) / node_memory_MemTotal_bytes{metric="VM"})
+
+  - name: VMusage
+    rules:
+      - alert: VM
+        expr: VMUsagePercentage > 10
+        for: 5s
+        labels:
+          severity: critical
+        annotations:
+          summary: "High VM Usage"
+          description: "Memory usage is kinda high: {{ $value }}%. Do something!"
