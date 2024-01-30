@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  nginx:
+    container_name: custom_nginx
+    image: custom_nginx_task23
+    labels:
+      logging: "promtail"
+      logging_jobname: "nginxlog"
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - apache
+    networks:
+      - task23
+
+  apache:
+    container_name: custom_apache
+    image: apache_custom_task23
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    ports:
+      - 8080:8080
+    networks:
+      - task23
+
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    networks:
+      - task23
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - task23
+
+  promtail:
+    image:  grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - ./promtail.yml:/etc/promtail/docker-config.yaml
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -config.file=/etc/promtail/docker-config.yaml
+    depends_on:
+      - loki
+    networks:
+      - task23
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - '9100:9100'
+
+
+networks:
+  task23:
+    name: task23
