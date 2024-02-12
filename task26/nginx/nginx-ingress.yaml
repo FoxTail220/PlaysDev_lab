@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: valerin-site-ingress
+spec:
+  rules:
+    - host: valerin-site.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-web-deployment
+                port:
+                  number: 80

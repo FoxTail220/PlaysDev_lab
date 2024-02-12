@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment
+  labels:
+    app: my-k8s-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: task26
+  template:
+    metadata:
+      labels:
+        project: task26
+    spec:
+      containers:
+        - name: nginx
+          image: foxtail220/nginx_task_minikube_no_ssl_no_links:v1
+          ports:
+            - containerPort: 80
+
+          readinessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              scheme: HTTP
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          startupProbe:
+            httpGet:
+              scheme: HTTP
+              path: /index.html
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          volumeMounts:
+            - name: nginx
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+            - name: index
+              mountPath: /usr/share/nginx/index.html
+              subPath: index.html
+
+        - name: apache
+          image: foxtail220/apache-jenkins2:1.21
+          ports:
+            - containerPort: 8080
+
+      volumes:
+        - name: nginx
+          secret:
+            secretName: nginx
+        - name: index
+          configMap:
+            name: index
+лг
