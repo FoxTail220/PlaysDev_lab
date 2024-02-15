@@ -15,7 +15,7 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: task31-ns
-
+  syncPolicy:
     automated:
       prune: true
       selfHeal: true
