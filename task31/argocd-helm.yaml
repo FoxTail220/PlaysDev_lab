@@ -1,25 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: task31-argocd
-  namespace: argocd
+  name: app
+  namespace: argo
 spec:
   project: default
-
   source:
-    repoURL: "https://github.com/FoxTail220/task31.git"
+    repoURL: 'https://github.com/FoxTail220/task31.git'
     path: helm_chart
     targetRevision: HEAD
     helm:
       valueFiles:
         - values.yaml
   destination:
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
     namespace: task31-ns
-
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
 
     automated:
       prune: true
