@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/FoxTail220/PlaysDev_lab/task31.git'
-    path: helm_chart
+    repoURL: 'https://github.com/FoxTail220/PlaysDev_lab.git'
+    path: 'task31/helm_chart'
     targetRevision: HEAD
     helm:
       valueFiles:
