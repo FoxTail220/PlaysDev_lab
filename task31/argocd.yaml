@@ -1,22 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: task31-argocd
   namespace: argocd
-finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    name: do-lon1-task31-argocd
-    namespace: argocd
-  source:
-    path: "demo-dev/myapp1" #путь 
-    repoURL: "git@github.com:FoxTail220/PlaysDev_lab.git"
-    targetRevision: HEAD
   project: default
+
+  source:
+    repoURL: https://github.com/FoxTail220/PlaysDev_lab.git
+    targetRevision: HEAD
+    path: task31
+  destination:
+    server: https://kubenetes.default.svc
+    namespace: task31-ns
+
   syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
     automated:
       prune: true
       selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+
+
