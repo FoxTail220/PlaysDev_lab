@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: do-lon1-task31-argocd
+    namespace: argocd
+  source:
+    path: "demo-dev/myapp1" #путь 
+    repoURL: "git@github.com:FoxTail220/PlaysDev_lab.git"
+    targetRevision: HEAD
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  syncOptions:
+    - CreateNamespace=true

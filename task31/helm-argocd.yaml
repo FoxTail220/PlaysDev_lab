@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp3-helm
+  namespace: argocd
+finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: do-lon1-task31-argocd
+    namespace: app3
+  source:
+    path: "HelmCharts/ChartTest1"
+    repoURL: "git@github.com:FoxTail220/argocd.git"
+    targetRevision: HEAD
+  helm:
+    valueFiles:
+      - dev_values.yaml
+    parameters:
+      - name: "container.image"
+        value: "adv4000/k8sphp:version1"
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  syncOptions:
+    - CreateNamespace=true
