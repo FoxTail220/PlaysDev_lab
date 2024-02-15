@@ -5,7 +5,7 @@ metadata:
   labels:
     app: my-k8s-application
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       project: task31
@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: foxtail220/nginx_task31:v2
+          image: {{ .Values.containers.image_nginx }}
           ports:
             - containerPort: 80
         - name: apache
-          image: foxtail220/apache_task31:v1
+          image: {{ .Values.containers.image_apache }}
           ports:
             - containerPort: 8080
 

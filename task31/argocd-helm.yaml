@@ -7,9 +7,12 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/FoxTail220/PlaysDev_lab.git
+    repoURL: "https://github.com/FoxTail220/task31.git"
+    path: helm_chart
     targetRevision: HEAD
-    path: task31
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: task31-ns
