@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment
+  labels:
+    app: my-k8s-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: task26
+  template:
+    metadata:
+      labels:
+        project: task26
+    spec:
+      containers:
+        - name: nginx
+          image: foxtail220/nginx_auth:v2
+          ports:
+            - containerPort: 80
+#          readinessProbe:
+#            httpGet:
+#              scheme: HTTP
+#              path: /index.html
+#              port: 80
+#            initialDelaySeconds: 10
+#            periodSeconds: 5
+#          livenessProbe:
+#            httpGet:
+#              scheme: HTTP
+#              path: /index.html
+#              port: 80
+#            initialDelaySeconds: 10
+#            periodSeconds: 5
+#          startupProbe:
+#            httpGet:
+#              scheme: HTTP
+#              path: /index.html
+#              port: 80
+#            initialDelaySeconds: 10
+#            periodSeconds: 5
+          volumeMounts:
+            - name: htpasswd
+              mountPath: /etc/nginx/.htpasswd
+              subPath: .htpasswd
+#        - name: apache
+#          image: foxtail220/apache_monitoring_nossl:v1
+#          ports:
+#            - containerPort: 8888
+      volumes:
+        - name: htpasswd
+          secret:
+            secretName: htpasswd
