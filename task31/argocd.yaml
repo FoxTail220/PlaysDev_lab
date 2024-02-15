@@ -11,15 +11,13 @@ spec:
     targetRevision: HEAD
     path: task31
   destination:
-    server: https://kubenetes.default.svc
+    server: https://kubernetes.default.svc
     namespace: task31-ns
 
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 
     automated:
       prune: true
       selfHeal: true
-
-
