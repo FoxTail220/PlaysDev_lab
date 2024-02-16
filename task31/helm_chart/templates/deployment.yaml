@@ -20,7 +20,7 @@ spec:
           ports:
             - containerPort: 80
         - name: apache
-          image: foxtail220/apache_task31:v1
+          image: {{ .Values.containers.image_apache }}
           ports:
             - containerPort: 8080
 
