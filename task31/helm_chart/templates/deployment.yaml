@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: foxtail220/nginx_task31:v2
+          image: foxtail220/nginx_task31:task31:{{latest}}
           ports:
             - containerPort: 80
         - name: apache
