@@ -4,7 +4,9 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    image-updater.quay.io/update-strategy: "registry"
+    argocd-image-updater.argoproj.io/image-list: myalias=gcr.io/project01/ms-echoserver:dev     #Write repository name
+    argocd-image-updater.argoproj.io/myalias.update-strategy: digest 
+    argocd-image-updater.argoproj.io/myalias.force-update: "true"
 spec:
   project: default
   source:
