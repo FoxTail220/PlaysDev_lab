@@ -4,9 +4,11 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: myalias=docker.io/foxtail220/nginx_task31:v6
+    argocd-image-updater.argoproj.io/image-list: myalias=foxtail220/nginx_task31:{{latest}}
     argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
     argocd-image-updater.argoproj.io/myalias.update-strategy: digest
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/myalias.force-update: "true"
 spec:
   project: default
@@ -24,3 +26,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
