@@ -4,7 +4,7 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: myalias=docker.io/foxtail220/nginx_task31
+    argocd-image-updater.argoproj.io/image-list: myalias=docker.io/foxtail220/nginx_task31:v6
     argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
     argocd-image-updater.argoproj.io/myalias.update-strategy: digest
     argocd-image-updater.argoproj.io/myalias.force-update: "true"
