@@ -1,5 +1,0 @@
-containers:
-  image_nginx: foxtail220/nginx_task31:v3
-  image_apache: foxtail220/apache_task31:v1
-
-replicas: 1
