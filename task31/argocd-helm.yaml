@@ -1,26 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: task31-argocd
+  name: app
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: myalias=index.docker.io/foxtail220/nginx_task31:*
+    argocd-image-updater.argoproj.io/write-back-method: git       
+    argocd-image-updater.argoproj.io/git-branch: main      
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+    argocd-image-updater.argoproj.io/myalias.force-update: "true"
 spec:
   project: default
-
   source:
-    repoURL: "https://github.com/FoxTail220/task31.git"
-    path: helm_chart
+    repoURL: 'https://github.com/FoxTail220/PlaysDev_lab.git'
+    path: 'task31/helm_chart'
     targetRevision: HEAD
     helm:
       valueFiles:
         - values.yaml
   destination:
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
     namespace: task31-ns
-
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-
     automated:
       prune: true
       selfHeal: true
