@@ -4,11 +4,7 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: myalias=index.docker.io/foxtail220/nginx_task31:*
-    argocd-image-updater.argoproj.io/write-back-method: git       
-    argocd-image-updater.argoproj.io/git-branch: main      
-    argocd-image-updater.argoproj.io/write-back-target: kustomization
-    argocd-image-updater.argoproj.io/myalias.force-update: "true"
+    image-updater.quay.io/update-strategy: "registry"
 spec:
   project: default
   source:
