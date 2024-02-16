@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: {{ .Values.containers.image_nginx }}
+          image: foxtail220/nginx_task31:v3
           ports:
             - containerPort: 80
         - name: apache
-          image: {{ .Values.containers.image_apache }}
+          image: foxtail220/apache_task31:v1
           ports:
             - containerPort: 8080
 
