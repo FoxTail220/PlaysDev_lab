@@ -7,9 +7,6 @@ metadata:
     argocd-image-updater.argoproj.io/image-list: myalias=foxtail220/nginx_task31:v5
     argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
     argocd-image-updater.argoproj.io/myalias.update-strategy: digest
-    argocd-image-updater.argoproj.io/write-back-method: git
-    argocd-image-updater.argoproj.io/git-branch: main
-    argocd-image-updater.argoproj.io/myalias.force-update: "true"
 spec:
   project: default
   source:
