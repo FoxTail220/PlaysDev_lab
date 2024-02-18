@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:^v1
-    argocd-image-updater.argoproj.io/foxtail220/nginx_task31.update-strategy: latest
+#    argocd-image-updater.argoproj.io/foxtail220/nginx_task31.update-strategy: digest
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -36,4 +36,5 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
+
 
