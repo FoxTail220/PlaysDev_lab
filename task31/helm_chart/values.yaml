@@ -1,5 +1,7 @@
-containers:
-  image_nginx: foxtail220/nginx_task31:0.4
-  image_apache: foxtail220/apache_task31:v1
+replicaCount: 1
 
-replicas: 1
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
