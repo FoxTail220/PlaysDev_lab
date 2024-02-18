@@ -5,7 +5,7 @@ metadata:
   name: my-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v10
+    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v8
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
