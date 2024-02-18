@@ -5,8 +5,8 @@ metadata:
   name: my-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: image-docker=foxtail220/nginx_task31:~v6
-#    argocd-image-updater.argoproj.io/image-docker.update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: image-docker=foxtail220/nginx_task31:^v2
+    argocd-image-updater.argoproj.io/image-docker.update-strategy: digest
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -22,7 +22,7 @@ spec:
         - name: "image.repository"
           value: foxtail220/nginx_task31
         - name: "image.tag"
-          value: v1
+          value: v2
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
