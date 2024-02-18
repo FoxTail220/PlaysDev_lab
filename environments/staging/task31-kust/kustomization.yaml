@@ -1,7 +1,7 @@
 ---
-namespace: task31-ns
+namespace: argocd
 replicas:
-  - name: my-web-deployment
+  - app: my-k8s-application
     count: 1
 images:
   - name: foxtail220/nginx_task31
