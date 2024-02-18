@@ -1,29 +1,39 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app
+  name: my-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: nginx
-    argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
-    argocd-image-updater.argoproj.io/myalias.update-strategy: digest
-    argocd-image-updater.argoproj.io/myalias.force-update: "true"
+    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v1
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/FoxTail220/PlaysDev_lab.git'
-    path: 'task31/helm_chart'
-    targetRevision: HEAD
+    repoURL: ssh://git@github.com:FoxTail220/PlaysDev_lab.git
+    targetRevision: main
+    path: task31/helm_chart
     helm:
-      valueFiles:
-        - values.yaml
+      parameters:
+        - name: "replicaCount"
+          value: "1"
+        - name: "image.repository"
+          value: foxtail220/nginx_task31
+        - name: "image.tag"
+          value: v1
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
     namespace: task31-ns
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
+      allowEmpty: false
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
 
 
