@@ -21,7 +21,7 @@ spec:
         - name: "image.repository"
           value: foxtail220/nginx_task31
         - name: "image.tag"
-          value: v5
+          value: v2
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
@@ -35,7 +35,6 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
-
 
 
 
