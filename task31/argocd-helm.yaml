@@ -5,7 +5,7 @@ metadata:
   name: my-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v1
+    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v6
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -24,7 +24,7 @@ spec:
           value: v1
   destination:
     server: https://kubernetes.default.svc
-    namespace: task31-ns
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true
@@ -35,5 +35,4 @@ spec:
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
       - PruneLast=true
-
 
