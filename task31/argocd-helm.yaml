@@ -4,7 +4,10 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    image-updater.quay.io/update-strategy: "registry"
+    argocd-image-updater.argoproj.io/image-list: nginx
+    argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
+    argocd-image-updater.argoproj.io/myalias.update-strategy: digest
+    argocd-image-updater.argoproj.io/myalias.force-update: "true"
 spec:
   project: default
   source:
