@@ -7,4 +7,4 @@ images:
   - name: foxtail220/nginx_task31
     newTag: v1
 resources:
-  - PlaysDev_lab/task31-deployment
+  - task31-deployment
