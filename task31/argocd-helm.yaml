@@ -11,7 +11,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ssh://git@github.com:FoxTail220/PlaysDev_lab.git
+    repoURL: https://github.com/FoxTail220/PlaysDev_lab.git
     targetRevision: main
     path: task31/helm_chart
     helm:
