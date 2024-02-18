@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: foxtail220/nginx_task31:v1
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           ports:
             - containerPort: 80
         - name: apache
