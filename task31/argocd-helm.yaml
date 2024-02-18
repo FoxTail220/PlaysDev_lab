@@ -4,7 +4,7 @@ metadata:
   name: app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: nginx:1.25.3
+    argocd-image-updater.argoproj.io/image-list: nginx
     argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/dockerhub-secret
     argocd-image-updater.argoproj.io/myalias.update-strategy: digest
 spec:
