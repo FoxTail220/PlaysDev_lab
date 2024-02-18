@@ -1,8 +1,5 @@
 containers:
-  image_nginx: foxtail220/nginx_task31:{{ .Values.nginxTag }}
-  image_apache: foxtail220/apache_task31:{{ .Values.apacheTag }}
+  image_nginx: foxtail220/nginx_task31:latest
+  image_apache: foxtail220/apache_task31:latest
 
 replicas: 1
-
-nginxTag: latest
-apacheTag: latest
