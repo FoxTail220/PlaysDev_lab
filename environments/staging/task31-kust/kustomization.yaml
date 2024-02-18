@@ -1,5 +1,5 @@
 ---
-namespace: staging
+namespace: task31-ns
 replicas:
   - name: my-web-deployment
     count: 1
