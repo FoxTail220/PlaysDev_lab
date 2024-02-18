@@ -4,7 +4,7 @@ replicas:
   - name: my-web-deployment
     count: 1
 images:
-  - name: aputra/nginx-lesson159
-    newTag: v0.1.0
+  - name: foxtail220/nginx_task31
+    newTag: v1
 resources:
-  - task31-deployment
+  - PlaysDev_lab/task31-deployment
