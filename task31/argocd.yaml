@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: task31-argocd
+  namespace: argocd
+
+annotations:
+    argocd-image-updater.argoproj.io/image-list: foxtail220/nginx_task31:~v1
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/FoxTail220/PlaysDev_lab.git
+    targetRevision: HEAD
+    path: task31/regular-deployment
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: task31-ns
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      prune: true
+      selfHeal: true
